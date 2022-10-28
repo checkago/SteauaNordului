@@ -50,7 +50,7 @@ class Category(models.Model):
 
 
 class Volume(models.Model):
-    name = models.CharField(max_length=3, verbose_name='Наименование')
+    name = models.CharField(max_length=4, verbose_name='Наименование')
 
     class Meta:
         verbose_name = 'Ед. изм.'
