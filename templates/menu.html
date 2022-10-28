@@ -4,7 +4,14 @@
 {% block content %}
     {% for Category in categories %}
      <div class="panel panel-default">
-         {{ Category.name }}
+         <a href="{{ Category.get_absolute_url }}">{{ Category.name }}</a>
+         <hr>
+         {% for Item in Category.items %}
+             <a href="{{ Item.get_absolute_url }}">{{ Item.name }}</a>
+         {% endfor %}
+         <div>
+
+         </div>
      </div>
 
     {% endfor %}

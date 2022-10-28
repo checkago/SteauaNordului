@@ -6,6 +6,7 @@ from web.models import Item, Category
 class ItemAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'category')
+    list_filter = ('category',)
 
 
 @admin.register(Category)

@@ -3,4 +3,8 @@
 
 {% block content %}
     {{ category.name }}
+    <hr>
+         {% for Item in category.items %}
+             <a href="{{ Item.get_absolute_url }}">{{ Item.name }}</a>
+         {% endfor %}
 {% endblock %}

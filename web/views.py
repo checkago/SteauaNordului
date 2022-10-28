@@ -9,10 +9,8 @@ class IndexView(views.View):
 
     def get(self, request, *args, **kwargs):
         categories = Category.objects.all()
-        items = Item.objects.filter(category=category)
         context = {
             'categories': categories,
-            'items': items
         }
         return render(request, 'menu.html', context)
 
