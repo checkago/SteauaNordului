@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Item(models.Model):
-    category =  models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, verbose_name='Категория')
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     name = models.CharField(max_length=100, verbose_name='Наименование млд.')
     name_ru = models.CharField(max_length=100, verbose_name='Наименование рус.', blank=True)
     slug = models.SlugField(unique=True, verbose_name='Псевдоним')
