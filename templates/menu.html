@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% for Category in categories %}
+     <div class="panel panel-default">
+         {{ Category.name }}
+     </div>
+
+    {% endfor %}
+
+{% endblock %}
