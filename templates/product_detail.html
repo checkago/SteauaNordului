@@ -3,6 +3,130 @@
 
 {% block content %}
 
-    {{ Item.name }}
+		<!-- PAGE CONTENT
+		============================================= -->
+		<div id="page" class="page">
+
+
+
+
+			<!-- PAGE HERO
+			============================================= -->
+			<div id="menu-page" class="page-hero-section division">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-10 offset-lg-1">
+							<div class="hero-txt text-center white-color">
+
+								<!-- Breadcrumb -->
+								<div id="breadcrumb">
+									<div class="row">
+										<div class="col">
+											<div class="breadcrumb-nav">
+												<nav aria-label="breadcrumb">
+												  	<ol class="breadcrumb">
+												    	<li class="breadcrumb-item"><a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a></li>
+                                                        <li class="breadcrumb-item active">{{ item.name }}</li>
+												  	</ol>
+												</nav>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Title -->
+								<h2 class="h2-xl">{{ item.name }}</h2>
+
+							</div>
+						</div>
+					</div>	  <!-- End row -->
+				</div>	   <!-- End container -->
+			</div>	<!-- END PAGE HERO -->
+
+            <!-- SINGLE PRODUCT
+			============================================= -->
+			<section id="product-1" class="pt-100 single-product division">
+				<div class="container">
+					<div class="row">
+
+
+						<!-- PRODUCT IMAGE -->
+						<div class="col-lg-7">
+							<div class="product-preview">
+
+
+							 	<!-- TABS CONTENT -->
+				 				<div class="tabs-content">
+
+				 					<!-- TAB-1 CONTENT -->
+                                    {% if item.image %}
+									<div id="tab-1-img" class="tab-content text-center displayed">
+										<img class="img-fluid" src="{{ item.image.url }}" alt="menu-image" />
+									</div>
+                                    {% else %}
+                                    <div id="tab-1-img" class="tab-content text-center displayed">
+										<img class="img-fluid" src="{% static 'placeholder_food.webp' %}" alt="menu-image" />
+									</div>
+                                    {% endif %}
+
+								</div>	<!-- END TABS CONTENT -->
+
+
+							</div>
+						</div>	<!-- END PRODUCT IMAGE -->
+
+
+						<!-- PRODUCT DISCRIPTION -->
+						<div class="col-lg-5">
+							<div class="product-description">
+
+								<!-- TITLE -->
+								<div class="project-title">
+
+									<!-- Title -->
+									<h2 class="h2-lg">{{ item.name }}</h2>
+                                    {% if item.name_ru %}
+                                    <h4 class="h2-lg">{{ item.name_ru }}</h4>
+                                    {% else %}
+                                    {% endif %}
+                                    <hr>
+									<!-- Price -->
+									<div class="project-price">
+										<h4 class="h4-xl yellow-color">{{ item.price_1 }}{% if item.price_2%}/{{ item.price_2 }}{% else %}{% endif %} lei</h4>
+									</div>
+
+								</div>
+
+								<!-- TEXT -->
+								<div class="product-txt">
+
+									{% if item.composition %}
+                                    <p class="p-md grey-color">
+                                        {{ item.composition }}
+									</p>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if item.composition_ru %}
+                                    <p class="p-md grey-color">
+                                        {{ item.composition_ru }}
+									</p>
+                                    {% else %}
+                                    {% endif %}
+									<!-- Product Data -->
+									<div class="product-info">
+										<h5><span>{{ item.volume_1 }}{% if item.volume_2%}/{{ item.volume_2 }}{% else %}{% endif %} {{ item.volume_choice }}.</span></h5>
+									</div>
+
+								</div>	<!-- END TEXT-->
+
+							</div>
+						</div>	<!-- END PRODUCT DISCRIPTION -->
+
+
+					</div>	  <!-- End row -->
+				</div>	   <!-- End container -->
+			</section>	<!-- END SINGLE PRODUCT -->
+
+		</div>	<!-- END PAGE CONTENT -->
 
 {% endblock %}

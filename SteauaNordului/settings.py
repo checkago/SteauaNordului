@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Ap_plication definition
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
-    'ckeditor'
+    'ckeditor',
+    'import_export'
 ]
 
 MIDDLEWARE = [

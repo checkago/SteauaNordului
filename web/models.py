@@ -5,16 +5,17 @@ from django.urls import reverse
 class Item(models.Model):
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     name = models.CharField(max_length=100, verbose_name='Наименование млд.')
-    name_ru = models.CharField(max_length=100, verbose_name='Наименование рус.', blank=True)
+    name_ru = models.CharField(max_length=100, verbose_name='Наименование рус.', blank=True, null=True)
     slug = models.SlugField(unique=True, verbose_name='Псевдоним')
-    composition = models.CharField(max_length=100, verbose_name='Состав млд.', blank=True)
-    composition_ru = models.CharField(max_length=100, verbose_name='Состав рус.', blank=True)
-    volume_1 = models.CharField(max_length=100, verbose_name='Объем/Вес', blank=True, null=True)
-    volume_choice = models.ForeignKey('Volume', on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Ед. изм')
+    composition = models.CharField(max_length=250, verbose_name='Состав млд.', blank=True, null=True)
+    composition_ru = models.CharField(max_length=250, verbose_name='Состав рус.', blank=True, null=True)
+    volume_choice = models.ForeignKey('Volume', on_delete=models.SET_NULL, blank=True, null=True,
+                                      verbose_name='Ед. изм')
+    volume_1 = models.CharField(max_length=100, verbose_name='Объем/Вес', blank=True)
     price_1 = models.FloatField(verbose_name='Цена')
     volume_2 = models.CharField(max_length=100, verbose_name='Объем/Вес', blank=True, null=True)
     price_2 = models.FloatField(verbose_name='Цена', blank=True, null=True)
-    image = models.ImageField(upload_to='media/images', verbose_name='Фото')
+    image = models.ImageField(upload_to='media/images', blank=True, null=True, verbose_name='Фото')
 
     class Meta:
         verbose_name = 'Блюдо'
@@ -34,6 +35,10 @@ class Item(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
     slug = models.SlugField(unique=True, verbose_name='Псевдоним')
+    parent_category = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE,
+                                        related_name='subcategories', verbose_name='Родительская категория')
+    icon = models.ImageField(upload_to='media/category_icons', blank=True, null=True, verbose_name='Иконка')
+    foto = models.ImageField(upload_to='media/category_fotos', blank=True, null=True, verbose_name='Фото')
 
     class Meta:
         verbose_name = 'Категория'

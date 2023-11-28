@@ -2,18 +2,133 @@
 {% load static %}
 
 {% block content %}
-    {% for Category in categories %}
-     <div class="panel panel-default">
-         <a href="{{ Category.get_absolute_url }}">{{ Category.name }}</a>
-         <hr>
-         {% for Item in Category.items %}
-             <a href="{{ Item.get_absolute_url }}">{{ Item.name }}</a>
-         {% endfor %}
-         <div>
 
-         </div>
-     </div>
+		<!-- PAGE CONTENT
+		============================================= -->
+		<div id="page" class="page">
 
-    {% endfor %}
+
+			<!-- PAGE HERO
+			============================================= -->
+			<div id="menu-page" class="page-hero-section division">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-10 offset-lg-1">
+							<div class="hero-txt text-center white-color">
+
+								<!-- Breadcrumb -->
+								<div id="breadcrumb">
+									<div class="row">
+										<div class="col">
+											<div class="breadcrumb-nav">
+												<nav aria-label="breadcrumb">
+												  	<ol class="breadcrumb">
+												    	<li class="breadcrumb-item active"><a href="{% url 'index' %}">Principală</a></li>
+												  	</ol>
+												</nav>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Title -->
+								<h2 class="h2-xl">Meniu nostru</h2>
+
+							</div>
+						</div>
+					</div>	  <!-- End row -->
+				</div>	   <!-- End container -->
+			</div>	<!-- END PAGE HERO -->
+
+
+						<!-- MENU-3
+			============================================= -->
+            <section id="menu-3" class="wide-100 menu-section division">
+                {% for category in categories %}
+                <div class="container">
+                    <!-- MENU-3 IMAGE -->
+                    <div class="menu-3-img mb-60">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if category.foto %}
+                                <img class="img-fluid" src="{{ category.foto.url }}" alt="menu-image">
+                                {% else %}
+                                    <img class="img-fluid" src="{% static 'placeholder.webp' %}" alt="menu-image">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MENU-3 WRAPPER -->
+                    <div class="menu-3-wrapper item-data-meat-hover">
+                        <!-- Title -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="menu-3-title"><h3 class="h3-md meat-color">{{ category.name }}</h3></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- LEFT COLUMN -->
+                            <div class="col-lg-6">
+                                <div class="menu-3-txt">
+                                    <ul class="menu-3-list">
+                                        {% for item in category.item_dict.left %}
+                                        <!-- MENU ITEM-1 -->
+                                        <li class="menu-3-item">
+                                            <a href="{{ item.get_absolute_url }}">
+                                                <!-- Title & Price -->
+                                                <div class="menu-title-wrapper rel">
+                                                    <div class="menu-item-title"><h5 class="h5-sm">{{ item.name }}</h5></div>
+                                                    <div class="menu-item-dots"></div>
+                                                    <div class="menu-item-price"><h5 class="h5-sm">{{ item.price_1 }} Lei</h5></div>
+                                                    <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }} {{ item.volume_choice }}</h6></div>
+                                                </div>
+                                                <!-- Description -->
+                                                {% if item.composition %}
+                                                <div class="menu-item-desc">
+                                                    <p>{{ item.composition }}</p>
+                                                </div>
+                                                {% else %}
+                                                {% endif %}
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div> <!-- END LEFT COLUMN -->
+                            <!-- RIGHT COLUMN -->
+                            <div class="col-lg-6">
+                                <div class="menu-3-txt">
+                                    <ul class="menu-3-list">
+                                        {% for item in category.item_dict.right %}
+                                        <!-- MENU ITEM-1 -->
+                                        <li class="menu-3-item">
+                                            <a href="{{ item.get_absolute_url }}">
+                                                <!-- Title & Price -->
+                                                <div class="menu-title-wrapper rel">
+                                                    <div class="menu-item-title"><h5 class="h5-sm">{{ item.name }}</h5></div>
+                                                    <div class="menu-item-dots"></div>
+                                                    <div class="menu-item-price"><h5 class="h5-sm">{{ item.price_1 }}</h5></div>
+                                                    <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }}</h6></div>
+                                                </div>
+                                                <!-- Description -->
+                                                {% if item.composition %}
+                                                <div class="menu-item-desc">
+                                                    <p>{{ item.composition }}</p>
+                                                </div>
+                                                {% else %}
+                                                {% endif %}
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div> <!-- END RIGHT COLUMN -->
+                        </div> <!-- End row -->
+                    </div> <!-- END MENU-3 WRAPPER -->
+                </div> <!-- End container -->
+                {% endfor %}
+            </section> <!-- END MENU-3 -->
+
+		</div>	<!-- END PAGE CONTENT -->
 
 {% endblock %}

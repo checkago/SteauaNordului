@@ -4,4 +4,4 @@ from django.apps import AppConfig
 class WebConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'web'
-    verbose_name = 'Menu Steaua Nordului'
+    verbose_name = 'Meniu Steaua Nordului'
