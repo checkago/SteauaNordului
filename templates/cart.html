@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+		<!-- PAGE CONTENT
+		============================================= -->
+		<div id="page" class="page">
+
+
+
+
+			<!-- PAGE HERO
+			============================================= -->
+			<div id="menu-page" class="page-hero-section division">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-10 offset-lg-1">
+							<div class="hero-txt text-center white-color">
+
+							</div>
+						</div>
+					</div>	  <!-- End row -->
+				</div>	   <!-- End container -->
+			</div>	<!-- END PAGE HERO -->
+
+            <section id="cart-1" class="wide-100 cart-page division">
+                <div class="container">
+                    <!-- CART TABLE -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="cart-table mb-70">
+                                <table id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Preț</th>
+                                            <th scope="col">Cantitate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for item in cart_items %}
+                                      <tr>
+                                        <td data-label="Product" class="product-name">
+                                          <!-- Preview -->
+                                          <div class="cart-product-img"><img src="{{ item.item.image.url }}" alt="cart-preview"></div>
+                                          <!-- Description -->
+                                          <div class="cart-product-desc">
+                                            <h5 class="h5-sm">{{ item.item.name }}</h5>
+                                            <p class="p-sm">{{ item.item.composition }}</p>
+                                          </div>
+                                        </td>
+                                        <td data-label="Price" class="product-price"><h5 class="h5-md">{{ item.item.price_1 }} Lei</h5></td>
+                                        <td data-label="Quantity" class="product-qty">
+                                          <input class="qty" type="number" min="1" max="20" value="{{ item.quantity }}">
+                                        </td>
+                                        <td data-label="Total" class="product-price-total"><h5 class="h5-md">{{ item.item.price_1 }} * {{ item.quantity }} Lei</h5></td>
+                                        <td data-label="Delete" class="td-trash"><i class="far fa-trash-alt"></i></td>
+                                      </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>    <!-- END CART TABLE -->
+                    <!-- CART CHECKOUT -->
+                    <div class="row">
+                        <!-- DISCOUNT COUPON -->
+                        <div class="col-lg-8">
+                            <div class="discount-coupon row pt-15">
+                                <!-- Form -->
+                                <div class="col-md-8 col-lg-7">
+                                    <form class="discount-form">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Coupon Code" id="discount-code">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-salmon tra-salmon-hover">Apply Coupon</button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Button -->
+                                <div class="col-md-4 col-lg-5 text-right">
+                                    <a onClick="window.location.reload()" class="btn btn-md btn-salmon tra-salmon-hover">Update Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CHECKOUT -->
+                        <div class="col-lg-4">
+                            <div class="cart-checkout bg-lightgrey">
+                                <!-- Title -->
+                                <h5 class="h5-lg">Cart Total</h5>
+                                <!-- Table -->
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Subtotal</td>
+                                            <td> </td>
+                                            <td class="text-right">${{ cart.total }}</td>
+                                        </tr>
+                                        <tr class="last-tr">
+                                            <td>Total</td>
+                                            <td> </td>
+                                            <td class="text-right">${{ cart.total }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- Button --></div>
+                        </div>    <!-- END CHECKOUT -->
+                    </div>      <!-- END CART CHECKOUT -->
+                </div>       <!-- End container -->
+            </section>   <!-- END CART PAGE -->
+
+		</div>	<!-- END PAGE CONTENT -->
+
+{% endblock %}

@@ -45,15 +45,16 @@
 			============================================= -->
             <section id="menu-3" class="wide-100 menu-section division">
                 {% for category in categories %}
-                <div class="container">
+                    <div class="container">
                     <!-- MENU-3 IMAGE -->
                     <div class="menu-3-img mb-60">
                         <div class="row">
                             <div class="col-md-12">
-                                {% if category.foto %}
+                                {% if category.foto and not category.parent_category %}
                                 <img class="img-fluid" src="{{ category.foto.url }}" alt="menu-image">
+                                {% elif category.parent_category %}
                                 {% else %}
-                                    <img class="img-fluid" src="{% static 'placeholder.webp' %}" alt="menu-image">
+                                <img class="img-fluid" src="{% static 'placeholder.webp' %}" alt="menu-image">
                                 {% endif %}
                             </div>
                         </div>
@@ -63,7 +64,11 @@
                         <!-- Title -->
                         <div class="row">
                             <div class="col-md-12">
+                                {% if not category.parent_category %}
                                 <div class="menu-3-title"><h3 class="h3-md meat-color">{{ category.name }}</h3></div>
+                                {% else %}
+                                <div class="menu-3-title"><h4 class="h4-md">{{ category.name }}</h4></div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="row">
@@ -77,17 +82,16 @@
                                             <a href="{{ item.get_absolute_url }}">
                                                 <!-- Title & Price -->
                                                 <div class="menu-title-wrapper rel">
-                                                    <div class="menu-item-title"><h5 class="h5-sm">{{ item.name }}</h5></div>
+                                                    <div class="menu-item-title"><h6 class="h6-sm">{{ item.name }}</h6></div>
                                                     <div class="menu-item-dots"></div>
-                                                    <div class="menu-item-price"><h5 class="h5-sm">{{ item.price_1 }} Lei</h5></div>
-                                                    <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }} {{ item.volume_choice }}</h6></div>
+                                                    <div class="menu-item-price"><h6 class="h6-sm">{{ item.price_1 }}{% if item.price_2%}/{{ item.price_2 }}{% endif %} lei</h6></div>
+                                                    <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }}{% if item.volume_2 %}/{{ item.volume_2 }}{% endif %}{% if item.volume_choice %} {{ item.volume_choice }}{% endif %}</h6></div>
                                                 </div>
                                                 <!-- Description -->
                                                 {% if item.composition %}
                                                 <div class="menu-item-desc">
                                                     <p>{{ item.composition }}</p>
                                                 </div>
-                                                {% else %}
                                                 {% endif %}
                                             </a>
                                         </li>
@@ -105,17 +109,16 @@
                                             <a href="{{ item.get_absolute_url }}">
                                                 <!-- Title & Price -->
                                                 <div class="menu-title-wrapper rel">
-                                                    <div class="menu-item-title"><h5 class="h5-sm">{{ item.name }}</h5></div>
+                                                    <div class="menu-item-title"><h6 class="h6-sm">{{ item.name }}</h6></div>
                                                     <div class="menu-item-dots"></div>
-                                                    <div class="menu-item-price"><h5 class="h5-sm">{{ item.price_1 }}</h5></div>
-                                                    <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }}</h6></div>
+                                                    <div class="menu-item-price"><h6 class="h6-sm">{{ item.price_1 }}{% if item.price_2%}/{{ item.price_2 }}{% endif %} lei</h6></div>
+                                                    <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }}{% if item.volume_2 %}/{{ item.volume_2 }}{% endif %}{% if item.volume_choice %} {{ item.volume_choice }}{% endif %}</h6></div>
                                                 </div>
                                                 <!-- Description -->
                                                 {% if item.composition %}
                                                 <div class="menu-item-desc">
                                                     <p>{{ item.composition }}</p>
                                                 </div>
-                                                {% else %}
                                                 {% endif %}
                                             </a>
                                         </li>

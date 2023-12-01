@@ -1,5 +1,5 @@
 from django.contrib import admin
-from web.models import Item, Category, Volume
+from web.models import Item, Category, Volume, Cart, CartItem
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -48,6 +48,48 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Volume)
 class VolumeAdmin(admin.ModelAdmin):
     list_display = ('name',)
+
+
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 0
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('id', 'total_products', 'final_price', 'total')
+    inlines = [CartItemInline]
+
+    def total_products(self, obj):
+        return obj.items.count()
+
+    def update_totals(self, request, queryset):
+        for cart in queryset:
+            cart.update_totals()
+
+    update_totals.short_description = 'Обновить итоги'
+
+    actions = [update_totals]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.prefetch_related('items')
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('cart', 'item', 'quantity')
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.select_related('cart', 'item')
+
+    def cart(self, obj):
+        return obj.cart.id
+
+    def item(self, obj):
+        return obj.item.title
+
+    cart.short_description = 'Корзина'
+    item.short_description = 'Товар'
 
 
 

@@ -65,3 +65,58 @@ class Volume(models.Model):
         return self.name
 
 
+class CartItem(models.Model):
+    cart = models.ForeignKey('Cart', related_name='cart_items', on_delete=models.CASCADE, verbose_name='Корзина')
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, verbose_name='Товар')
+    quantity = models.PositiveIntegerField(default=1, verbose_name='Количество')
+    final_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Общая стоимость')
+
+    class Meta:
+        verbose_name = 'Продукт корзины'
+        verbose_name_plural = 'Продукты корзины'
+
+    def __str__(self):
+        return f"Продукт: {self.item.name} для корзины"
+
+    def save(self, *args, **kwargs):
+        self.final_price = self.quantity * self.item.price_1
+        super().save(*args, **kwargs)
+
+
+class Cart(models.Model):
+    items = models.ManyToManyField(Item, through='CartItem', related_name='carts')
+    total_products = models.IntegerField(default=0, verbose_name='Общее количество товаров в корзине')
+    final_price = models.DecimalField(max_digits=9, decimal_places=2, default=0.00, verbose_name='Общая стоимость')
+    total = models.DecimalField(max_digits=9, decimal_places=2, default=0.00, verbose_name='Итоговая стоимость')
+
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины покупателей'
+
+    def __str__(self):
+        return f"Корзина №{self.id}"
+
+    def add_to_cart(self, item_id, quantity):
+        item = Item.objects.get(id=item_id)
+        cart_product, created = CartItem.objects.get_or_create(cart=self, item=item)
+        if not created:
+            cart_product.quantity += quantity
+            cart_product.save()
+        self.update_totals()
+
+    def remove_from_cart(self, item_id):
+        item = Item.objects.get(id=item_id)
+        cart_product = CartItem.objects.get(cart=self, item=item)
+        cart_product.delete()
+        self.update_totals()
+
+    def update_totals(self):
+        cart_products = self.items.all()
+        total_quantity = cart_products.aggregate(total_quantity=models.Sum('quantity'))['total_quantity']
+        total_price = cart_products.aggregate(total_price=models.Sum('final_price'))['total_price']
+        self.total_products = total_quantity if total_quantity else 0
+        self.final_price = total_price if total_price else 0.00
+        self.total = self.final_price
+        self.save()
+
+

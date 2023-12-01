@@ -120,14 +120,18 @@
 	                		</li>
 
 	                		<!-- DROPDOWN MENU -->
-	                    	<li><a href="#">Meniu</a>
-	                        	<ul>
-                                    {% for Category in categories %}
-	                            	<li><a href="{{ Category.get_absolute_url }}">{{ Category.name }}</a></li>
+                            <li><a href="#">Меню</a>
+                                <ul>
+                                    {% for category in categories %}
+                                        {% if category.parent_category is None %}
+                                            <li>
+                                                <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+                                            </li>
+                                        {% endif %}
                                     {% endfor %}
-	                            </ul>
-	                        </li>
-							<!-- DROPDOWN MENU -->
+                                </ul>
+                            </li>
+                            <!-- DROPDOWN MENU -->
 	                        <li><a href="#">Contacte</a>
 	                        </li>
 
@@ -208,6 +212,28 @@
 			<script src="{% static 'js/html5shiv.js' %}" type="text/javascript"></script>
 			<script src="{% static 'js/respond.min.js' %}" type="text/javascript"></script>
 		<![endif] -->
+
+          <script>
+            $(document).ready(function() {
+              $('.add-to-cart-form').on('submit', function(event) {
+                event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+                var form = $(this);
+                var url = form.attr('action');
+                var quantity = form.find('input[name="quantity"]').val();
+                $.ajax({
+                  url: url,
+                  type: 'POST',
+                  data: {
+                    quantity: quantity
+                  },
+                  success: function(response) {
+                    // Обновляем содержимое страницы, например, обновляем корзину или выводим сообщение об успешном добавлении товара
+                    console.log(response.message);
+                  }
+                });
+              });
+            });
+          </script>
 
 	</body>
 
