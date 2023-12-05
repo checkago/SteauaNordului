@@ -5969,6 +5969,7 @@ input[type=number]::-webkit-inner-spin-button {
     border-bottom: none;
     display: block;
     margin-bottom: 25px;
+    background-color: #f9f9f8;
   }
   
   .cart-table table td {

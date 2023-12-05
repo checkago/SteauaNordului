@@ -120,7 +120,7 @@
 	                		</li>
 
 	                		<!-- DROPDOWN MENU -->
-                            <li><a href="#">Меню</a>
+                            <li><a href="#">Meniu</a>
                                 <ul>
                                     {% for category in categories %}
                                         {% if category.parent_category is None %}
@@ -132,9 +132,12 @@
                                 </ul>
                             </li>
                             <!-- DROPDOWN MENU -->
-	                        <li><a href="#">Contacte</a>
-	                        </li>
-
+                            <!-- SHOPING CART -->
+                            <li class="basket-ico ico-30">
+					        	<a href="{% url 'cart' %}">
+					        		<span class="ico-holder"><span class="flaticon-shopping-bag"></span> <em class="roundpoint">{{ cart_items_count }}</em></span>
+					        	</a>
+					        </li>
 	                        <!-- HEADER BUTTON  -->
 	                        <li class="nav-btn yellow-color"><a href="tel:068422333">0-684-223-33</a></li>
 
@@ -164,7 +167,7 @@
 				<div class="container grey-color">
 					<!-- BOTTOM FOOTER -->
 					<div class="bottom-footer">
-						<div class="row d-flex align-items-center">
+						<div class="row d-flex align-product-center">
 
 
 							<!-- FOOTER COPYRIGHT -->
@@ -212,28 +215,6 @@
 			<script src="{% static 'js/html5shiv.js' %}" type="text/javascript"></script>
 			<script src="{% static 'js/respond.min.js' %}" type="text/javascript"></script>
 		<![endif] -->
-
-          <script>
-            $(document).ready(function() {
-              $('.add-to-cart-form').on('submit', function(event) {
-                event.preventDefault(); // Предотвращаем отправку формы по умолчанию
-                var form = $(this);
-                var url = form.attr('action');
-                var quantity = form.find('input[name="quantity"]').val();
-                $.ajax({
-                  url: url,
-                  type: 'POST',
-                  data: {
-                    quantity: quantity
-                  },
-                  success: function(response) {
-                    // Обновляем содержимое страницы, например, обновляем корзину или выводим сообщение об успешном добавлении товара
-                    console.log(response.message);
-                  }
-                });
-              });
-            });
-          </script>
 
 	</body>
 

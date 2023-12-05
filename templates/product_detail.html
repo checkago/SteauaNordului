@@ -23,7 +23,7 @@
                                             <div class="breadcrumb-nav">
                                                 <nav aria-label="breadcrumb">
                                                     <ol class="breadcrumb">
-                                                        <li class="breadcrumb-item active">Корзина</li>
+                                                        <li class="breadcrumb-item active">{{ product.category.name }}</li>
                                                     </ol>
                                                 </nav>
                                             </div>
@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <!-- Title -->
-                                <h2 class="h2-xl">Корзина</h2>
+                                <h2 class="h2-xl">{{ product.name }}</h2>
                             </div>
                         </div>
                     </div>
@@ -55,9 +55,9 @@
 				 				<div class="tabs-content">
 
 				 					<!-- TAB-1 CONTENT -->
-                                    {% if item.image %}
+                                    {% if product.image %}
 									<div id="tab-1-img" class="tab-content text-center displayed">
-										<img class="img-fluid" src="{{ item.image.url }}" alt="menu-image" />
+										<img class="img-fluid" src="{{ product.image.url }}" alt="menu-image" />
 									</div>
                                     {% else %}
                                     <div id="tab-1-img" class="tab-content text-center displayed">
@@ -74,43 +74,42 @@
 
 						<!-- PRODUCT DISCRIPTION -->
                     <div class="col-lg-5">
-                        <form action="{% url 'add_to_cart' category_slug=item.category.slug item_slug=item.slug %}" method="POST">
+                        <form action="" method="POST">
                             {% csrf_token %}
                             <div class="product-description">
                                 <!-- TITLE -->
                                 <div class="project-title">
                                     <!-- Title -->
-                                    <h2 class="h2-lg">{{ item.name }}</h2>
-                                    {% if item.name_ru %}
-                                    <h4 class="h2-lg">{{ item.name_ru }}</h4>
+                                    <h2 class="h2-lg">{{ product.name }}</h2>
+                                    {% if product.name_ru %}
+                                    <h4 class="h2-lg">{{ product.name_ru }}</h4>
                                     {% else %}
                                     {% endif %}
                                     <hr>
                                     <!-- Price -->
                                     <div class="project-price">
-                                        <h4 class="h4-xl yellow-color">{{ item.price_1 }}{% if item.price_2%}/{{ item.price_2 }}{% endif %} lei</h4>
+                                        <h4 class="h4-xl yellow-color">{{ product.price_1 }}{% if product.price_2%}/{{ product.price_2 }}{% endif %} lei</h4>
                                     </div>
                                 </div>
                                 <!-- TEXT -->
                                 <div class="product-txt">
-                                    {% if item.composition %}
+                                    {% if product.composition %}
                                     <p class="p-md grey-color">
-                                        {{ item.composition }}
+                                        {{ product.composition }}
                                     </p>
                                     {% else %}
                                     {% endif %}
-                                    {% if item.composition_ru %}
+                                    {% if product.composition_ru %}
                                     <p class="p-md grey-color">
-                                        {{ item.composition_ru }}
+                                        {{ product.composition_ru }}
                                     </p>
                                     {% else %}
                                     {% endif %}
                                     <!-- Product Data -->
                                     <div class="product-info">
-                                        <h5><span>{{ item.volume_1 }}{% if item.volume_2%}/{{ item.volume_2 }}{% endif %} {% if item.volume_choice %}{{ item.volume_choice }}{% endif %}</span></h5>
+                                        <h5><span>{{ product.volume_1 }}{% if product.volume_2%}/{{ product.volume_2 }}{% endif %} {% if product.volume_choice %}{{ product.volume_choice }}{% endif %}</span></h5>
                                     </div>
-                                    <input class="qty" type="number" min="1" max="20" value="1">
-                                    <button class="add-to-cart-btn bg-yellow ico-20 text-center" type="submit">Добавить в корзину</button>
+                                    <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart-btn bg-yellow ico-20 text-center">Ordine</a>
                                 </div> <!-- END TEXT-->
                             </div>
                         </form>

@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'web',
     'ckeditor',
-    'import_export'
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +88,19 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    # we use "default" as the alias.
+    "default": {
+        # Here, we're using the database-backed cache backend.
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+
+        # Provide a LOCATION parameter to specify the database table name where cached data will be stored.
+        "LOCATION": "cache_table",
+    }
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

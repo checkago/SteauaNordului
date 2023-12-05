@@ -1,36 +1,36 @@
 from django.contrib import admin
-from web.models import Item, Category, Volume, Cart, CartItem
+from web.models import Product, Category, Volume
 from import_export.admin import ImportExportModelAdmin
 
 
-@admin.register(Item)
-class ItemAdmin(ImportExportModelAdmin):
+@admin.register(Product)
+class ProductAdmin(ImportExportModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'category')
     list_filter = ('category',)
 
-    actions = ['duplicate_items']
+    actions = ['duplicate_products']
 
-    def duplicate_items(self, request, queryset):
-        for item in queryset:
+    def duplicate_products(self, request, queryset):
+        for product in queryset:
             # Создаем новый объект с переносом данных полей и пустым значением slug
-            new_item = Item(
-                category=item.category,
-                name=item.name,
-                name_ru=item.name_ru,
+            new_product = Product(
+                category=product.category,
+                name=product.name,
+                name_ru=product.name_ru,
                 slug='',  # Пустое значение slug
-                composition=item.composition,
-                composition_ru=item.composition_ru,
-                volume_choice=item.volume_choice,
-                volume_1=item.volume_1,
-                price_1=item.price_1,
-                volume_2=item.volume_2,
-                price_2=item.price_2,
-                image=item.image
+                composition=product.composition,
+                composition_ru=product.composition_ru,
+                volume_choice=product.volume_choice,
+                volume_1=product.volume_1,
+                price_1=product.price_1,
+                volume_2=product.volume_2,
+                price_2=product.price_2,
+                image=product.image
             )
-            new_item.save()
+            new_product.save()
 
-    duplicate_items.short_description = 'Дублировать выбранные элементы'
+    duplicate_products.short_description = 'Дублировать выбранные элементы'
 
     def save_model(self, request, obj, form, change):
         # Проверяем, является ли slug пустым
@@ -40,56 +40,15 @@ class ItemAdmin(ImportExportModelAdmin):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ImportExportModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name',)
 
 
 @admin.register(Volume)
-class VolumeAdmin(admin.ModelAdmin):
+class VolumeAdmin(ImportExportModelAdmin):
     list_display = ('name',)
 
-
-class CartItemInline(admin.TabularInline):
-    model = CartItem
-    extra = 0
-
-@admin.register(Cart)
-class CartAdmin(admin.ModelAdmin):
-    list_display = ('id', 'total_products', 'final_price', 'total')
-    inlines = [CartItemInline]
-
-    def total_products(self, obj):
-        return obj.items.count()
-
-    def update_totals(self, request, queryset):
-        for cart in queryset:
-            cart.update_totals()
-
-    update_totals.short_description = 'Обновить итоги'
-
-    actions = [update_totals]
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.prefetch_related('items')
-
-@admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('cart', 'item', 'quantity')
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.select_related('cart', 'item')
-
-    def cart(self, obj):
-        return obj.cart.id
-
-    def item(self, obj):
-        return obj.item.title
-
-    cart.short_description = 'Корзина'
-    item.short_description = 'Товар'
 
 
 

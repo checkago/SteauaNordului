@@ -78,21 +78,21 @@
                 <div class="col-lg-6">
                     <div class="menu-3-txt">
                         <ul class="menu-3-list">
-                            {% for item in subcategory_data.left_items %}
+                            {% for product in subcategory_data.left_products %}
                             <!-- MENU ITEM-1 -->
                             <li class="menu-3-item">
-                                <a href="{{ item.get_absolute_url }}">
+                                <a href="{{ product.get_absolute_url }}">
                                     <!-- Title & Price -->
                                     <div class="menu-title-wrapper rel">
-                                        <div class="menu-item-title"><h6 class="h6-xs">{{ item.name }}</h6></div>
+                                        <div class="menu-item-title"><h6 class="h6-xs">{{ product.name }}</h6></div>
                                         <div class="menu-item-dots"></div>
-                                        <div class="menu-item-price"><h6 class="h6-xs">{{ item.price_1 }} Lei</h6></div>
-                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }}{% if item.volume_choice %} {{ item.volume_choice }}{% endif %}</h6></div>
+                                        <div class="menu-item-price"><h6 class="h6-xs">{{ product.price_1 }} Lei</h6></div>
+                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
                                     </div>
                                     <!-- Description -->
-                                    {% if item.composition %}
+                                    {% if product.composition %}
                                     <div class="menu-item-desc">
-                                        <p>{{ item.composition }}</p>
+                                        <p>{{ product.composition }}</p>
                                     </div>
                                     {% endif %}
                                 </a>
@@ -104,21 +104,21 @@
                 <div class="col-lg-6">
                     <div class="menu-3-txt">
                         <ul class="menu-3-list">
-                            {% for item in subcategory_data.right_items %}
+                            {% for product in subcategory_data.right_products %}
                             <!-- MENU ITEM-1 -->
                             <li class="menu-3-item">
-                                <a href="{{ item.get_absolute_url }}">
+                                <a href="{{ product.get_absolute_url }}">
                                     <!-- Title & Price -->
                                     <div class="menu-title-wrapper rel">
-                                        <div class="menu-item-title"><h6 class="h6-xs">{{ item.name }}</h6></div>
+                                        <div class="menu-item-title"><h6 class="h6-xs">{{ product.name }}</h6></div>
                                         <div class="menu-item-dots"></div>
-                                        <div class="menu-item-price"><h6 class="h6-xs">{{ item.price_1 }} Lei</h6></div>
-                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }}{% if item.volume_choice %} {{ item.volume_choice }}{% endif %}</h6></div>
+                                        <div class="menu-item-price"><h6 class="h6-xs">{{ product.price_1 }} Lei</h6></div>
+                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
                                     </div>
                                     <!-- Description -->
-                                    {% if item.composition %}
+                                    {% if product.composition %}
                                     <div class="menu-item-desc">
-                                        <p>{{ item.composition }}</p>
+                                        <p>{{ product.composition }}</p>
                                     </div>
                                     {% endif %}
                                 </a>
@@ -133,21 +133,21 @@
                 <div class="col-lg-6">
                     <div class="menu-3-txt">
                         <ul class="menu-3-list">
-                            {% for item in left_items %}
+                            {% for product in left_products %}
                             <!-- MENU ITEM-1 -->
                             <li class="menu-3-item">
-                                <a href="{{ item.get_absolute_url }}">
+                                <a href="{{ product.get_absolute_url }}">
                                     <!-- Title & Price -->
                                     <div class="menu-title-wrapper rel">
-                                        <div class="menu-item-title"><h6 class="h6-sm">{{ item.name }}</h6></div>
+                                        <div class="menu-item-title"><h6 class="h6-sm">{{ product.name }}</h6></div>
                                         <div class="menu-item-dots"></div>
-                                        <div class="menu-item-price"><h6 class="h6-sm">{{ item.price_1 }}{% if item.price_2%}/{{ item.price_2 }}{% endif %} lei</h6></div>
-                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }}{% if item.volume_choice %} {{ item.volume_choice }}{% endif %}</h6></div>
+                                        <div class="menu-item-price"><h6 class="h6-sm">{{ product.price_1 }}{% if product.price_2%}/{{ product.price_2 }}{% endif %} lei</h6></div>
+                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
                                     </div>
                                     <!-- Description -->
-                                    {% if item.composition %}
+                                    {% if product.composition %}
                                     <div class="menu-item-desc">
-                                        <p>{{ item.composition }}</p>
+                                        <p>{{ product.composition }}</p>
                                     </div>
                                     {% endif %}
                                 </a>
@@ -159,21 +159,21 @@
                 <div class="col-lg-6">
                     <div class="menu-3-txt">
                         <ul class="menu-3-list">
-                            {% for item in right_items %}
+                            {% for product in right_products %}
                             <!-- MENU ITEM-1 -->
                             <li class="menu-3-item">
-                                <a href="{{ item.get_absolute_url }}">
+                                <a href="{{ product.get_absolute_url }}">
                                     <!-- Title & Price -->
                                     <div class="menu-title-wrapper rel">
-                                        <div class="menu-item-title"><h6 class="h6-xs">{{ item.name }}</h6></div>
+                                        <div class="menu-item-title"><h6 class="h6-xs">{{ product.name }}</h6></div>
                                         <div class="menu-item-dots"></div>
-                                        <div class="menu-item-price"><h6 class="h6-xs">{{ item.price_1 }} Lei</h6></div>
-                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ item.volume_1 }}{% if item.volume_choice %} {{ item.volume_choice }}{% endif %}</h6></div>
+                                        <div class="menu-item-price"><h6 class="h6-xs">{{ product.price_1 }} Lei</h6></div>
+                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
                                     </div>
                                     <!-- Description -->
-                                    {% if item.composition %}
+                                    {% if product.composition %}
                                     <div class="menu-item-desc">
-                                        <p>{{ item.composition }}</p>
+                                        <p>{{ product.composition }}</p>
                                     </div>
                                     {% endif %}
                                 </a>
