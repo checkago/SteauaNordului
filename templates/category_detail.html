@@ -112,7 +112,7 @@
                                     <div class="menu-title-wrapper rel">
                                         <div class="menu-item-title"><h6 class="h6-xs">{{ product.name }}</h6></div>
                                         <div class="menu-item-dots"></div>
-                                        <div class="menu-item-price"><h6 class="h6-xs">{{ product.price_1 }} Lei</h6></div>
+                                        <div class="menu-item-price"><h6 class="h6-xs">{{ product.price_1 }}{% if product.price_2%}/{{ product.price_2 }}{% endif %} lei</h6></div>
                                         <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
                                     </div>
                                     <!-- Description -->
@@ -142,7 +142,7 @@
                                         <div class="menu-item-title"><h6 class="h6-sm">{{ product.name }}</h6></div>
                                         <div class="menu-item-dots"></div>
                                         <div class="menu-item-price"><h6 class="h6-sm">{{ product.price_1 }}{% if product.price_2%}/{{ product.price_2 }}{% endif %} lei</h6></div>
-                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
+                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_2 %}/{{ product.volume_2 }}{% endif %}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
                                     </div>
                                     <!-- Description -->
                                     {% if product.composition %}
@@ -167,8 +167,8 @@
                                     <div class="menu-title-wrapper rel">
                                         <div class="menu-item-title"><h6 class="h6-xs">{{ product.name }}</h6></div>
                                         <div class="menu-item-dots"></div>
-                                        <div class="menu-item-price"><h6 class="h6-xs">{{ product.price_1 }} Lei</h6></div>
-                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
+                                        <div class="menu-item-price"><h6 class="h6-xs">{{ product.price_1 }}{% if product.price_2%}/{{ product.price_2 }}{% endif %} lei</h6></div>
+                                        <div class="menu-3-item-data bg-grey"><h6 class="h6-xs grey-color">{{ product.volume_1 }}{% if product.volume_2 %}/{{ product.volume_2 }}{% endif %}{% if product.volume_choice %} {{ product.volume_choice }}{% endif %}</h6></div>
                                     </div>
                                     <!-- Description -->
                                     {% if product.composition %}

@@ -1,0 +1,5 @@
+CREATE USER admin WITH PASSWORD 'Gkh747c';
+
+CREATE DATABASE steauanordului;
+
+GRANT ALL PRIVILEGES ON DATABASE steauanordului TO admin;

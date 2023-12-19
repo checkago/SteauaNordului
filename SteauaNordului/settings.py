@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
-# import environ
+import environ
 from pathlib import Path
 
-# env = environ.Env()
-# environ.Env.read_env('.env')
+env = environ.Env()
+environ.Env.read_env('.env')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 

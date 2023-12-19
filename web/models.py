@@ -15,8 +15,6 @@ class Product(models.Model):
                                       verbose_name='Ед. изм')
     volume_1 = models.CharField(max_length=100, verbose_name='Объем/Вес', blank=True, null=True)
     price_1 = models.FloatField(verbose_name='Цена')
-    volume_2 = models.CharField(max_length=100, verbose_name='Объем/Вес', blank=True, null=True)
-    price_2 = models.FloatField(verbose_name='Цена', blank=True, null=True)
     image = models.ImageField(upload_to='media/images', blank=True, null=True, verbose_name='Фото')
 
     class Meta:
