@@ -14,7 +14,7 @@ odfpy==1.4.1
 openpyxl==3.0.10
 Pillow==9.2.0
 psycopg2-binary==2.9.5
-PyYAML==6.0
+PyYAML
 sqlparse==0.4.3
 tablib==3.2.1
 xlrd==2.0.1
